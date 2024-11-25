@@ -5,22 +5,63 @@
     box-sizing: border-box;
 }
 
-.flex{
-    display: flex;
-}
-
 html,
 body{
    height: 100%;
    width: 100%;
 }
 
-.container{
+body{
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .calculator{
-    height: 650px;
+    display: flex;
+    height: 600px;
     width: 450px;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.inside{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.header{
+    display: flex;
+    flex: 3;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.display{
+    margin-top: 50px;
+    height:90px;
+}
+
+.buttons{
+    display: flex;
+    flex: 8;
+    flex-direction: column;
+}
+
+.row{
+    display: flex;
+    flex: 1;
+}
+
+.button{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.zero{
+    flex: 2;
 }
