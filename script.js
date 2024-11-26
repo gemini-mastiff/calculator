@@ -9,7 +9,13 @@ const clearBtn = document.querySelector("#AC");
 const add = (a, b) => a+b;
 const subtract = (a, b) =>  a-b;
 const multiply = (a, b) => a*b;
-const divide = (a, b) => a/b ;
+const divide = (a, b) => {
+    if (b === 0){
+        return "Nice try."
+    } else {
+        return a/b;
+    }
+};
 
 let num1 = null;
 let num2 = null;
@@ -29,7 +35,8 @@ function logVariables(){
 `num1: ${num1}
 operator: ${operator}
 num2: ${num2}
-result: ${result}`);
+result: ${result}
+Number(displayNum): ${Number(displayNum)}`);
 }
 
 function clearVars(){
@@ -53,7 +60,6 @@ function processSum(num2){
 numBtns.forEach((button) => {
     button.addEventListener("click", () => {
         displayNum += button.id;
-        value = Number(displayNum);
         display.textContent = displayNum;
         logVariables()
     })
@@ -67,17 +73,18 @@ opBtns.forEach((button) => {
         if (!operator){
             operator = button.id;
         } else {
-            processSum(value);
+            processSum(Number(displayNum));
             operator = button.id;
         }
 
         if (display.textContent == result) {
-            console.log("num1 = result")
+            console.log("result used for num1")
             num1 = result;
         } else if (!num1) {
-            num1 = value;
+            num1 = Number(displayNum);
+            result = 0;
         } else if (!num2) {
-            processSum(value);
+            processSum(Number(displayNum));
         }
         displayNum = '';
         logVariables()
@@ -85,7 +92,7 @@ opBtns.forEach((button) => {
 });
 
 equalBtn.addEventListener("click", () => {
-    processSum(value);
+    processSum(Number(displayNum));
     logVariables()
 })
 
