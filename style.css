@@ -50,6 +50,11 @@ body{
 
 .display{
     height:90px;
+    padding: 20px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-size: 68px;
 }
 
 /* Buttons */
