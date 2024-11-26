@@ -89,6 +89,10 @@ body{
     background-color: orange;
 }
 
+.currentOp{
+    background-color: #ffbf00;
+}
+
 .func{
     background-color: #555;
 }
