@@ -1,7 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     box-sizing: border-box;
 }
 
@@ -9,6 +9,7 @@ html,
 body{
    height: 100%;
    width: 100%;
+   font-family: Arial, Helvetica, sans-serif;
 }
 
 body{
@@ -17,12 +18,16 @@ body{
     align-items: center;
 }
 
+/* Calculator */
+
 .calculator{
     display: flex;
     height: 600px;
     width: 450px;
     flex-direction: column;
-    padding: 10px;
+    padding: 14px;
+    background-color: black;
+    border-radius: 15px;
 }
 
 .inside{
@@ -30,7 +35,11 @@ body{
     flex: 1;
     flex-direction: column;
     gap: 10px;
+    color: white;
+    font-size: 28px;
 }
+
+/* Header */
 
 .header{
     display: flex;
@@ -40,19 +49,22 @@ body{
 }
 
 .display{
-    margin-top: 50px;
     height:90px;
 }
+
+/* Buttons */
 
 .buttons{
     display: flex;
     flex: 8;
     flex-direction: column;
+    gap: 8px;
 }
 
 .row{
     display: flex;
     flex: 1;
+    gap: 8px;
 }
 
 .button{
@@ -60,8 +72,17 @@ body{
     flex: 1;
     justify-content: center;
     align-items: center;
+    border-radius: 20px;
 }
 
-.zero{
-    flex: 2;
+.number{
+    background-color: #333;
+}
+
+.operator{
+    background-color: orange;
+}
+
+.func{
+    background-color: #555;
 }
