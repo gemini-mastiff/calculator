@@ -1,5 +1,6 @@
 const display = document.querySelector("#display");
 let displayNum = '';
+let result = 0; 
 const numBtns = document.querySelectorAll(".number");
 const opBtns = document.querySelectorAll(".operator");
 const equalBtn = document.querySelector("#equals");
@@ -27,12 +28,12 @@ function processSum() {
     num1 = sumArr[0];
     num2 = sumArr[2];
     operator = sumArr[1];
-    console.log(operator)
     return operate(num1, num2, operator);
 }
 
 numBtns.forEach((button) => {
     button.addEventListener("click", () => {
+        result = 0;
         displayNum += button.id;
         display.textContent = displayNum;
     })
@@ -40,12 +41,17 @@ numBtns.forEach((button) => {
 
 opBtns.forEach((button) => {
     button.addEventListener("click", () => {
+        if (result != 0){
+            displayNum += result;
+            result = 0;
+        }
         displayNum += ` ${button.id} `;
         display.textContent = displayNum;
     })
 })
 
 equalBtn.addEventListener("click", () => {
-    displayNum = processSum()
-    display.textContent = displayNum;
+    result = processSum()
+    displayNum = '';
+    display.textContent = result;
 })
