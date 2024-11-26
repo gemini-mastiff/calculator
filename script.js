@@ -1,6 +1,8 @@
 const display = document.querySelector("#display");
 let displayNum = '';
 const numBtns = document.querySelectorAll(".number");
+const opBtns = document.querySelectorAll(".operator");
+
 
 const add = (a, b) => a+b;
 const subtract = (a, b) =>  a-b;
@@ -20,6 +22,13 @@ function operate(firstNum, secondNum, operator){
 };
 
 numBtns.forEach((button) => {
+    button.addEventListener("click", () => {
+        displayNum += button.id;
+        display.textContent = displayNum;
+    })
+})
+
+opBtns.forEach((button) => {
     button.addEventListener("click", () => {
         displayNum += button.id;
         display.textContent = displayNum;
