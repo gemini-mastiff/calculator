@@ -25,7 +25,7 @@ let num2 = null;
 let operator = null;
 let result = '';
 
-function operate(a, b, operation){
+function operate(a, b, operation) {
     return operation === "+" ? add(a, b)
     : operation === "-" ? subtract(a, b)
     : operation === "*" ? multiply(a, b)
@@ -40,7 +40,7 @@ function clearVars(){
     displayNum = '';
 }
 
-function processSum(){
+function processSum() {
     result = operate(num1, num2, operator)
     result = Number(result.toFixed(2)) //rounds to 2 d.p. and converts to int
     if (result.toString().length > 10){
@@ -63,7 +63,7 @@ function updateDisplay() {
     };
 }
 
-function checkEdgeCases(button){
+function checkEdgeCases(button) {
     if (display.textContent === '0' && button.id === '0'){
         //prevents multiple 0s from being typed without another number
         displayNum = '';
@@ -72,6 +72,13 @@ function checkEdgeCases(button){
     } else if (button.id === '.' && displayNum.includes('.')){
         //quick fix to only allow one decimal point in the str
         displayNum = displayNum.replace('.', '[TEMP]').replace(/[.]/g, '').replace('[TEMP]', '.');
+    }
+}
+
+function useDisplay() {
+    //in cases where the result needs to be manipulated as a str
+    if (displayNum === ''){
+        displayNum = display.textContent;
     }
 }
 
@@ -124,6 +131,7 @@ delBtn.addEventListener("click", () => {
 });
 
 posNegBtn.addEventListener("click", () => {
+    useDisplay();
     if (displayNum.includes('-')){
         displayNum = displayNum.substring(1);
         updateDisplay();
@@ -134,6 +142,7 @@ posNegBtn.addEventListener("click", () => {
 });
 
 percentBtn.addEventListener("click", () => {
+    useDisplay();
     displayNum = (displayNum/100).toString(); //kept as string so it can  continue to be manipulated properly
     updateDisplay();
 });
