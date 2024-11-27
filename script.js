@@ -33,15 +33,6 @@ function operate(a, b, operation){
     : "Err.";
 };
 
-function logVariables(){
-    console.log(
-`num1: ${num1}
-operator: ${operator}
-num2: ${num2}
-result: ${result}
-Number(displayNum): ${Number(displayNum)}`);
-}
-
 function clearVars(){
     num1 = null;
     num2 = null;
@@ -53,10 +44,21 @@ function processSum(){
     result = operate(num1, num2, operator)
     result = Number(result.toFixed(2)) //rounds to 2 d.p. and converts to int
     if (result.toString().length > 10){
-        result = "Err. too big!"
+        result = "Err. too big!";
     }
     display.textContent = result;
     clearVars();
+}
+
+function updateDisplay() {
+    if (displayNum > 10) {
+        //display can only hold 10 characters before it overflows
+        displayNum = displayNum.substring(0,10);
+    } else if (displayNum === ''){
+        //there will always be a number showing, even if it is just 0
+        displayNum = '0';
+    };
+    display.textContent = displayNum;
 }
 
 numBtns.forEach((button) => {
@@ -65,11 +67,9 @@ numBtns.forEach((button) => {
         if (button.id === '.' && displayNum.includes('.')){
             displayNum = displayNum.replace('.', '[TEMP]').replace(/[.]/g, '').replace('[TEMP]', '.');
         }
-        if (displayNum > 10) displayNum = displayNum.substring(0,10);
-        display.textContent = displayNum;
-        logVariables()
-    })
-})
+        updateDisplay();
+    });
+});
 
 opBtns.forEach((button) => {
     button.addEventListener("click", () => {
@@ -83,11 +83,8 @@ opBtns.forEach((button) => {
             num1 = Number(display.textContent);
             operator = button.id;
         }
-
-        operator = button.id
-
-        logVariables()
-    })
+        operator = button.id;
+    });
 });
 
 equalBtn.addEventListener("click", () => {
@@ -96,36 +93,30 @@ equalBtn.addEventListener("click", () => {
         processSum()
     } else {
         console.log("ERROR");
-    }
-    logVariables()
-
-})
+    };
+});
 
 clearBtn.addEventListener("click", () => {
     clearVars();
-    display.textContent = '0';
-    logVariables();
+    updateDisplay();
 });
 
 delBtn.addEventListener("click", () => {
     displayNum = displayNum.slice(0, -1);
-    display.textContent = displayNum;
-    if (displayNum === ''){
-        display.textContent = '0';
-    }
+    updateDisplay();
 });
 
 posNegBtn.addEventListener("click", () => {
     if (displayNum.includes('-')){
         displayNum = displayNum.substring(1);
-        display.textContent = displayNum;
+        updateDisplay();
     } else {
         displayNum = `-${displayNum}`;
-        display.textContent = displayNum;
+        updateDisplay();
     };
 });
 
 percentBtn.addEventListener("click", () => {
     displayNum = displayNum/100;
-    display.textContent = displayNum;
+    updateDisplay();
 });
