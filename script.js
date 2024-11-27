@@ -20,7 +20,7 @@ const divide = (a, b) => {
 let num1 = null;
 let num2 = null;
 let operator = null;
-let result = 0;
+let result = null;
 
 function operate(a, b, operation){
     return operation === "+" ? add(a, b)
@@ -44,16 +44,15 @@ function clearVars(){
     num2 = null;
     operator = null;
     displayNum = '';
-    opBtns.forEach(button => button.classList.remove("currentOp"));
-
 }
 
-function processSum(num2){
+function processSum(){
     result = operate(num1, num2, operator)
+    result = Number(result.toFixed(2)) //rounds to 2 d.p. and converts to int
     if (result.toString().length > 10){
         result = "Err. too big!"
     }
-    display.textContent = result
+    display.textContent = result;
     clearVars();
 }
 
@@ -61,43 +60,43 @@ numBtns.forEach((button) => {
     button.addEventListener("click", () => {
         displayNum += button.id;
         display.textContent = displayNum;
+        if(displayNum > 10) displayNum = displayNum.substring(0,9);
         logVariables()
     })
 })
 
 opBtns.forEach((button) => {
     button.addEventListener("click", () => {
-        opBtns.forEach(button => button.classList.remove("currentOp"));
-        button.classList.add("currentOp");
-
-        if (!operator){
-            operator = button.id;
-        } else {
-            processSum(Number(displayNum));
+        
+        if (!num1){
+            num1 = Number(display.textContent);
+            displayNum = '';
+        } else if (num1 && operator){
+            num2 = Number(display.textContent);
+            processSum()
+            num1 = Number(display.textContent);
             operator = button.id;
         }
 
-        if (display.textContent == result) {
-            console.log("result used for num1")
-            num1 = result;
-        } else if (!num1) {
-            num1 = Number(displayNum);
-            result = 0;
-        } else if (!num2) {
-            processSum(Number(displayNum));
-        }
-        displayNum = '';
+        operator = button.id
+
         logVariables()
     })
 });
 
 equalBtn.addEventListener("click", () => {
-    processSum(Number(displayNum));
+    if (num1 && operator){
+        num2 = Number(display.textContent);
+        processSum()
+    } else {
+        console.log("ERROR");
+    }
     logVariables()
+
 })
 
 clearBtn.addEventListener("click", () => {
-    clearVars()
-    display.textContent = '';
-    logVariables()
+    clearVars();
+    display.textContent = '0';
+    logVariables();
 })
