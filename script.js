@@ -44,10 +44,11 @@ function processSum(){
     result = operate(num1, num2, operator)
     result = Number(result.toFixed(2)) //rounds to 2 d.p. and converts to int
     if (result.toString().length > 10){
+        //display can only hold up to 10 numbers
         result = "Err. too big!";
     }
     display.textContent = result;
-    clearVars();
+    clearVars(); //refreshes the calc to begin again
 }
 
 function updateDisplay() {
@@ -64,6 +65,7 @@ function updateDisplay() {
 
 function checkEdgeCases(button){
     if (display.textContent === '0' && button.id === '0'){
+        //prevents multiple 0s from being typed without another number
         displayNum = '';
     } else if (display.textContent === '0' && button.id === '.'){
         displayNum = '0.';
@@ -72,6 +74,8 @@ function checkEdgeCases(button){
         displayNum = displayNum.replace('.', '[TEMP]').replace(/[.]/g, '').replace('[TEMP]', '.');
     }
 }
+
+//----- BUTTON EVENT LISTENERS -----
 
 numBtns.forEach((button) => {
     button.addEventListener("click", () => {
@@ -83,17 +87,20 @@ numBtns.forEach((button) => {
 
 opBtns.forEach((button) => {
     button.addEventListener("click", () => {
-        
         if (!num1){
             num1 = Number(display.textContent);
+            //stores displayNum in num1 as an int, then refreshes displayNum
             displayNum = '';
+            operator = button.id;
         } else if (num1 && operator){
             num2 = Number(display.textContent);
             processSum()
+            //this is when input is num > operator > num > operator etc.
+            //num1 automatically becomes result
             num1 = Number(display.textContent);
+            //operator only changes after previous operation is complete
             operator = button.id;
         }
-        operator = button.id;
     });
 });
 
@@ -102,7 +109,7 @@ equalBtn.addEventListener("click", () => {
         num2 = Number(display.textContent);
         processSum()
     } else {
-        console.log("ERROR");
+        console.log("No second argument");
     };
 });
 
@@ -127,6 +134,6 @@ posNegBtn.addEventListener("click", () => {
 });
 
 percentBtn.addEventListener("click", () => {
-    displayNum = (displayNum/100).toString();
+    displayNum = (displayNum/100).toString(); //kept as string so it can  continue to be manipulated properly
     updateDisplay();
 });
