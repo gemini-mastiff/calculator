@@ -2,25 +2,7 @@
 
 This is the final project of the Odin Project's Foundation course. I will be making a functioning calculator that will take two numbers and an operator, and will output the result of this sum. I will be implementing a GUI as well.
 
-# To-Do
+# post-project
+This project was really challenging, I had to seriously stretch my brain for this one. My calculator has a few minor nitpicks that could do w/ ironing out, but on the whole it works and doesn't seem to break as far as I can tell. The only thing I didn't implement from the project spec is the keyboard functionality. Besides that, I'm overall quite happy and proud of how this has turned out.
 
-1. Create functions for all basic operators:
-- Addition
-- Subtraction
-- Multiplication
-- Division
-    - These will be tested in the console first, before any GUI, to ensure the underlying functionality works.
-    - Each operation will consist of three variables:
-        - Number A
-        - Operator
-        - Number B
-    - Create a function operate() that takes the variables and calls the appropriate function above, to output a sum.
-
-2. Create the HTML calculator
-    - At this point, it is about creating a GUI that looks good, implementing the code will come after
-    - Should include all digits and operators (and an =)
-    - Should include a display
-    - Add a clear button
-
-3. Make the calcuator work!
-    - I will write more once I get to this stage, as I'm unsure how I will exactly implement this yet.
+I'm realising now there is an option to disable buttons in JS, and I can picture how I would do things differently next time. On the whole, I think I've learnt from this. Next time I will definitely spend more time planning before I get into actually programming anything.
