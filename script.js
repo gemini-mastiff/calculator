@@ -14,7 +14,7 @@ const subtract = (a, b) =>  a-b;
 const multiply = (a, b) => a*b;
 const divide = (a, b) => {
     if (b === 0){
-        return "Nice try."
+        return 5318008;
     } else {
         return a/b;
     }
@@ -23,7 +23,7 @@ const divide = (a, b) => {
 let num1 = null;
 let num2 = null;
 let operator = null;
-let result = null;
+let result = '';
 
 function operate(a, b, operation){
     return operation === "+" ? add(a, b)
@@ -54,19 +54,29 @@ function updateDisplay() {
     if (displayNum > 10) {
         //display can only hold 10 characters before it overflows
         displayNum = displayNum.substring(0,10);
-    } else if (displayNum === ''){
-        //there will always be a number showing, even if it is just 0
-        displayNum = '0';
-    };
+    } 
     display.textContent = displayNum;
+    if (displayNum === ''){
+        //there will always be a number showing, even if it is just 0
+        display.textContent = '0';
+    };
+}
+
+function checkEdgeCases(button){
+    if (display.textContent === '0' && button.id === '0'){
+        displayNum = '';
+    } else if (display.textContent === '0' && button.id === '.'){
+        displayNum = '0.';
+    } else if (button.id === '.' && displayNum.includes('.')){
+        //quick fix to only allow one decimal point in the str
+        displayNum = displayNum.replace('.', '[TEMP]').replace(/[.]/g, '').replace('[TEMP]', '.');
+    }
 }
 
 numBtns.forEach((button) => {
     button.addEventListener("click", () => {
         displayNum += button.id;
-        if (button.id === '.' && displayNum.includes('.')){
-            displayNum = displayNum.replace('.', '[TEMP]').replace(/[.]/g, '').replace('[TEMP]', '.');
-        }
+        checkEdgeCases(button);
         updateDisplay();
     });
 });
@@ -117,6 +127,6 @@ posNegBtn.addEventListener("click", () => {
 });
 
 percentBtn.addEventListener("click", () => {
-    displayNum = displayNum/100;
+    displayNum = (displayNum/100).toString();
     updateDisplay();
 });
