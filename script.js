@@ -146,3 +146,5 @@ percentBtn.addEventListener("click", () => {
     displayNum = (displayNum/100).toString(); //kept as string so it can  continue to be manipulated properly
     updateDisplay();
 });
+
+//trying to see if this will make github update
