@@ -126,5 +126,6 @@ posNegBtn.addEventListener("click", () => {
 });
 
 percentBtn.addEventListener("click", () => {
-
+    displayNum = displayNum/100;
+    display.textContent = displayNum;
 });
