@@ -105,7 +105,7 @@ clearBtn.addEventListener("click", () => {
     clearVars();
     display.textContent = '0';
     logVariables();
-})
+});
 
 delBtn.addEventListener("click", () => {
     displayNum = displayNum.slice(0, -1);
@@ -113,4 +113,18 @@ delBtn.addEventListener("click", () => {
     if (displayNum === ''){
         display.textContent = '0';
     }
+});
+
+posNegBtn.addEventListener("click", () => {
+    if (displayNum.includes('-')){
+        displayNum = displayNum.substring(1);
+        display.textContent = displayNum;
+    } else {
+        displayNum = `-${displayNum}`;
+        display.textContent = displayNum;
+    };
+});
+
+percentBtn.addEventListener("click", () => {
+
 });
