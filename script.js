@@ -4,6 +4,9 @@ const numBtns = document.querySelectorAll(".number");
 const opBtns = document.querySelectorAll(".operator");
 const equalBtn = document.querySelector("#equals");
 const clearBtn = document.querySelector("#AC");
+const delBtn = document.querySelector("#DEL");
+const posNegBtn = document.querySelector("#pos-neg");
+const percentBtn = document.querySelector("#percent");
 
 
 const add = (a, b) => a+b;
@@ -59,8 +62,11 @@ function processSum(){
 numBtns.forEach((button) => {
     button.addEventListener("click", () => {
         displayNum += button.id;
+        if (button.id === '.' && displayNum.includes('.')){
+            displayNum = displayNum.replace('.', '[TEMP]').replace(/[.]/g, '').replace('[TEMP]', '.');
+        }
+        if (displayNum > 10) displayNum = displayNum.substring(0,10);
         display.textContent = displayNum;
-        if(displayNum > 10) displayNum = displayNum.substring(0,9);
         logVariables()
     })
 })
@@ -100,3 +106,11 @@ clearBtn.addEventListener("click", () => {
     display.textContent = '0';
     logVariables();
 })
+
+delBtn.addEventListener("click", () => {
+    displayNum = displayNum.slice(0, -1);
+    display.textContent = displayNum;
+    if (displayNum === ''){
+        display.textContent = '0';
+    }
+});
